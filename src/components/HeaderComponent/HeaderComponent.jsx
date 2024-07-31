@@ -10,7 +10,7 @@ function HeaderComponent() {
   return (
     <div className="bg-mainBlue text-white">
       <div className="flex justify-center items-center w-wLap mx-auto py-[10px]">
-        <div className="w-2/12 text-4xl font-bold">TECHMART</div>
+        <div className="w-3/12 text-4xl font-bold">TECHMART</div>
 
         <div className="w-6/12">
           <label className="input input-bordered flex items-center gap-2 bg-white text-textColor text-xl pl-[10px] pr-0 h-[34px]">
@@ -21,9 +21,9 @@ function HeaderComponent() {
           </label>
         </div>
 
-        <div className="w-4/12 flex items-center justify-center">
+        <div className="w-3/12 flex items-center justify-end">
           <div className="flex items-center ml-4">
-            <i className="text-4xl p-3">
+            <i className="text-5xl p-3">
               <FaRegUser />
             </i>
             <div className="flex flex-col text-xl">
@@ -50,7 +50,7 @@ function HeaderComponent() {
               </div>
             </div>
           </div>
-          <i className="text-4xl ml-9">
+          <i className="text-5xl ml-9">
             <FaCartShopping />
           </i>
         </div>

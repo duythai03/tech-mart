@@ -1,0 +1,22 @@
+/* SliderComponent.css */
+.slick-prev,
+.slick-next {
+  border-radius: 50%; /* Hình dạng nút */
+  width: 30px; /* Chiều rộng của nút */
+  height: 30px; /* Chiều cao của nút */
+  z-index: 1; /* Đảm bảo nút ở trên cùng */
+}
+
+.slick-prev::before,
+.slick-next::before {
+  color: #fff; /* Màu của biểu tượng mũi tên */
+  font-size: 30px; /* Kích thước của biểu tượng mũi tên */
+}
+
+.slick-prev {
+  left: 10px; /* Khoảng cách từ cạnh trái */
+}
+
+.slick-next {
+  right: 10px; /* Khoảng cách từ cạnh phải */
+}
