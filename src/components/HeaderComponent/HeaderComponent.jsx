@@ -9,7 +9,7 @@ import {
 function HeaderComponent() {
   return (
     <div className="bg-mainBlue text-white">
-      <div className="flex justify-center items-center w-wLap mx-auto py-[10px]">
+      <div className="flex justify-center items-center mx-auto py-[10px] w-full max-w-screen-xl px-[10px] sm:px-0">
         <div className="w-3/12 text-4xl font-bold">TECHMART</div>
 
         <div className="w-6/12">

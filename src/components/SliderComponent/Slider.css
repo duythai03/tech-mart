@@ -20,3 +20,8 @@
 .slick-next {
   right: 10px; /* Khoảng cách từ cạnh phải */
 }
+
+.slick-slider {
+  width: 100%;
+  max-width: 100vw; /* Đảm bảo slider không vượt quá chiều rộng của màn hình */
+}

@@ -9,9 +9,6 @@ module.exports = {
         textColor: "#333",
         lineColor: "#e5e5e5",
       },
-      spacing: {
-        wLap: "1392px",
-      },
     },
   },
   plugins: [require("daisyui")],
