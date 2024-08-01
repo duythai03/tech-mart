@@ -5,7 +5,7 @@ import DefaultComponent from "./components/DefaultComponent/DefaultComponent";
 
 function App() {
   return (
-    <div>
+    <div className="overflow-hidden">
       <Router>
         <Routes>
           {routes.map((route) => {

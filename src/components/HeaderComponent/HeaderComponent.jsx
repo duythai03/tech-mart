@@ -5,12 +5,15 @@ import {
   FaCaretDown,
   FaCartShopping,
 } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 function HeaderComponent() {
   return (
     <div className="bg-mainBlue text-white">
       <div className="flex justify-center items-center mx-auto py-[10px] w-full max-w-screen-xl px-[10px] sm:px-0">
-        <div className="w-3/12 text-4xl font-bold">TECHMART</div>
+        <Link to="/" className="w-3/12 text-4xl font-bold">
+          TECHMART
+        </Link>
 
         <div className="w-6/12">
           <label className="input input-bordered flex items-center gap-2 bg-white text-textColor text-xl pl-[10px] pr-0 h-[34px]">
