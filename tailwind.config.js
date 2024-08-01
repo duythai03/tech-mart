@@ -9,6 +9,9 @@ module.exports = {
         textColor: "#333",
         lineColor: "#e5e5e5",
       },
+      backgroundImage: {
+        "sign-in-bg": "url('/src/assets/images/sign-in-background.avif')",
+      },
     },
   },
   plugins: [require("daisyui")],
