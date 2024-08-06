@@ -20,12 +20,12 @@ function SignInPage() {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate("/");
-      localStorage.setItem("acccess_oken", data?.access_token);
+      localStorage.setItem("acccess_oken", JSON.stringify(data?.access_token));
       if (data?.access_token) {
         const user = jwtDecode(data?.access_token);
         if (user?.id) {
           handleGetUserDetail(user?.id, data?.access_token);
+          navigate("/");
         }
       }
     }

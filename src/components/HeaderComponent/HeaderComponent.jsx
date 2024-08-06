@@ -33,27 +33,30 @@ function HeaderComponent() {
               <FaRegUser />
             </i>
             <div className="flex flex-col text-xl">
-              {!user && <Link to="/sign-in">Đăng nhập/Đăng ký</Link>}
-              <div className="dropdown">
-                <div
-                  tabIndex={0}
-                  role="button"
-                  className="btn m-1 bg-mainBlue text-white border-0 hover:bg-mainBlue text-2xl p-0"
-                >
-                  Tài khoản <FaCaretDown />
+              {/* {!user.email && <Link to="/sign-in">Đăng nhập/Đăng ký</Link>} */}
+              <Link to="/sign-in">Đăng nhập/Đăng ký</Link>
+              {user.email && (
+                <div className="dropdown">
+                  <div
+                    tabIndex={0}
+                    role="button"
+                    className="btn m-1 bg-mainBlue text-white border-0 hover:bg-mainBlue text-2xl p-0"
+                  >
+                    {user.name} <FaCaretDown />
+                  </div>
+                  <ul
+                    tabIndex={0}
+                    className="dropdown-content menu rounded-box z-[1] w-52 p-2 shadow bg-white text-black text-xl"
+                  >
+                    <li>
+                      <a href="/">Item 1</a>
+                    </li>
+                    <li>
+                      <a href="/">Item 2</a>
+                    </li>
+                  </ul>
                 </div>
-                <ul
-                  tabIndex={0}
-                  className="dropdown-content menu rounded-box z-[1] w-52 p-2 shadow bg-white text-black text-xl"
-                >
-                  <li>
-                    <a href="/">Item 1</a>
-                  </li>
-                  <li>
-                    <a href="/">Item 2</a>
-                  </li>
-                </ul>
-              </div>
+              )}
             </div>
           </div>
           <i className="text-5xl ml-9">

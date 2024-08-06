@@ -1,18 +1,53 @@
 import React from "react";
 import { useEffect } from "react";
-import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { routes } from "./routes";
 import DefaultComponent from "./components/DefaultComponent/DefaultComponent";
+import { isJsonString } from "./utils/isJsonString";
+import { jwtDecode } from "jwt-decode";
+import * as UserService from "./service/UserService";
+import { updateUser } from "./redux/slices/userSlice";
+import { useDispatch } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/product/get-all`)
-      .then((res) => {
-        console.log(res.data);
-      });
+    let { user, storageData } = handleDecoded();
+    if (user?.id) {
+      handleGetUserDetail(user?.id, storageData);
+    }
   }, []);
+
+  const handleDecoded = () => {
+    let storageData = localStorage.getItem("acccess_oken");
+    let user = {};
+    if (storageData && isJsonString(storageData)) {
+      storageData = JSON.parse(storageData);
+      user = jwtDecode(storageData);
+    }
+    return { user, storageData };
+  };
+
+  UserService.axiosJWT.interceptors.request.use(
+    async (config) => {
+      const currentTime = new Date();
+      let { user } = handleDecoded();
+      if (user?.exp < currentTime.getTime() / 1000) {
+        const data = await UserService.refreshToken();
+        config.headers["token"] = `Bearer ${data.access_token}`;
+      }
+      return config;
+    },
+    function (error) {
+      // Do something with request error
+      return Promise.reject(error);
+    }
+  );
+
+  const handleGetUserDetail = async (id, token) => {
+    const res = await UserService.getUserDetail(id, token);
+    dispatch(updateUser({ ...res.data, access_token: token }));
+  };
 
   return (
     <div className="overflow-hidden">
