@@ -30,7 +30,7 @@ function HeaderComponent() {
               <FaRegUser />
             </i>
             <div className="flex flex-col text-xl">
-              <span className="">Đăng nhập/Đăng ký</span>
+              <Link to="/sign-in">Đăng nhập/Đăng ký</Link>
               <div className="dropdown">
                 <div
                   tabIndex={0}
