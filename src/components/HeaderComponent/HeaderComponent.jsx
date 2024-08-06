@@ -6,8 +6,11 @@ import {
   FaCartShopping,
 } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function HeaderComponent() {
+  const user = useSelector((state) => state.user);
+  console.log("user", user);
   return (
     <div className="bg-mainBlue text-white">
       <div className="flex justify-center items-center mx-auto py-[10px] w-full max-w-screen-xl px-[10px] sm:px-0">
@@ -30,7 +33,7 @@ function HeaderComponent() {
               <FaRegUser />
             </i>
             <div className="flex flex-col text-xl">
-              <Link to="/sign-in">Đăng nhập/Đăng ký</Link>
+              {!user && <Link to="/sign-in">Đăng nhập/Đăng ký</Link>}
               <div className="dropdown">
                 <div
                   tabIndex={0}
