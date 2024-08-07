@@ -7,9 +7,18 @@ import {
 } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import * as UserService from "../../service/UserService";
+import { resetUser } from "../../redux/slices/userSlice";
+import { useDispatch } from "react-redux";
+
 
 function HeaderComponent() {
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const handleLogout = async () => {
+    await UserService.logoutUser();
+    dispatch(resetUser());
+  };
   console.log("user", user);
   return (
     <div className="bg-mainBlue text-white">
@@ -18,7 +27,7 @@ function HeaderComponent() {
           TECHMART
         </Link>
 
-        <div className="w-6/12">
+        <div className="w-5/12">
           <label className="input input-bordered flex items-center gap-2 bg-white text-textColor text-xl pl-[10px] pr-0 h-[34px]">
             <input type="text" className="grow" placeholder="Tìm kiếm" />
             <kbd className="  text-gray-500 text-2xl h-full px-4 flex items-center rounded-md hover:bg-[#cee1ff]">
@@ -27,14 +36,13 @@ function HeaderComponent() {
           </label>
         </div>
 
-        <div className="w-3/12 flex items-center justify-end">
+        <div className="w-4/12 flex items-center justify-center">
           <div className="flex items-center ml-4">
             <i className="text-5xl p-3">
               <FaRegUser />
             </i>
             <div className="flex flex-col text-xl">
-              {/* {!user.email && <Link to="/sign-in">Đăng nhập/Đăng ký</Link>} */}
-              <Link to="/sign-in">Đăng nhập/Đăng ký</Link>
+              {!user.email && <Link to="/sign-in">Đăng nhập/Đăng ký</Link>}
               {user.email && (
                 <div className="dropdown">
                   <div
@@ -46,13 +54,20 @@ function HeaderComponent() {
                   </div>
                   <ul
                     tabIndex={0}
-                    className="dropdown-content menu rounded-box z-[1] w-52 p-2 shadow bg-white text-black text-xl"
+                    className="dropdown-content menu rounded-box z-[1] w-72 p-2 shadow bg-white text-black text-xl shadow-lg"
                   >
                     <li>
-                      <a href="/">Item 1</a>
+                      <Link to="/profile-user" className="hover:text-mainBlue">
+                        Thông tin người dùng
+                      </Link>
                     </li>
                     <li>
-                      <a href="/">Item 2</a>
+                      <div
+                        className="hover:text-mainBlue"
+                        onClick={handleLogout}
+                      >
+                        Đăng xuất
+                      </div>
                     </li>
                   </ul>
                 </div>
