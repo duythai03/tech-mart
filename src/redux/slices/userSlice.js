@@ -7,17 +7,20 @@ export const userSlice = createSlice({
     email: "",
     phone: "",
     address: "",
+    avatar: "",
     access_token: "",
     id: "",
   },
   reducers: {
     updateUser: (state, action) => {
-      const { name, email, access_token, address, phone, _id } = action.payload;
+      const { name, email, access_token, address, avatar, phone, _id } =
+        action.payload;
       console.log("action", action);
       state.name = name || "User";
       state.email = email;
       state.phone = phone || "";
       state.address = address || "Tp. Hồ Chí Minh, Việt Nam";
+      state.avatar = avatar || "";
       state.access_token = access_token;
       state.id = _id || "";
     },
@@ -26,6 +29,7 @@ export const userSlice = createSlice({
       state.email = "";
       state.phone = "";
       state.address = "";
+      state.avatar = "";
       state.access_token = "";
       state.id = "";
     },

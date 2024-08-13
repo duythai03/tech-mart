@@ -11,7 +11,6 @@ import * as UserService from "../../service/UserService";
 import { resetUser } from "../../redux/slices/userSlice";
 import { useDispatch } from "react-redux";
 
-
 function HeaderComponent() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -39,7 +38,14 @@ function HeaderComponent() {
         <div className="w-4/12 flex items-center justify-center">
           <div className="flex items-center ml-4">
             <i className="text-5xl p-3">
-              <FaRegUser />
+              {user.avatar === "" && <FaRegUser />}
+              {user.avatar !== "" && (
+                <img
+                  src={user.avatar}
+                  alt="avatar"
+                  className="w-[30px] h-[30px] rounded-full object-cover ml-6"
+                />
+              )}
             </i>
             <div className="flex flex-col text-xl">
               {!user.email && <Link to="/sign-in">Đăng nhập/Đăng ký</Link>}
