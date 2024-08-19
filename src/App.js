@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { routes } from "./routes";
@@ -7,19 +7,23 @@ import { isJsonString } from "./utils/isJsonString";
 import { jwtDecode } from "jwt-decode";
 import * as UserService from "./service/UserService";
 import { updateUser } from "./redux/slices/userSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
+  const user = useSelector((state) => state.user);
   useEffect(() => {
+    setIsLoading(true);
     let { user, storageData } = handleDecoded();
     if (user?.id) {
       handleGetUserDetail(user?.id, storageData);
     }
+    setIsLoading(false);
   }, []);
 
   const handleDecoded = () => {
-    let storageData = localStorage.getItem("acccess_oken");
+    let storageData = localStorage.getItem("access_oken");
     let user = {};
     if (storageData && isJsonString(storageData)) {
       storageData = JSON.parse(storageData);
@@ -51,27 +55,30 @@ function App() {
 
   return (
     <div className="overflow-hidden">
-      <Router>
-        <Routes>
-          {routes.map((route) => {
-            const Page = route.page;
-            const Layout = route.isShowHeader
-              ? DefaultComponent
-              : React.Fragment;
-            return (
-              <Route
-                key={route.path}
-                path={route.path}
-                element={
-                  <Layout>
-                    <Page />
-                  </Layout>
-                }
-              />
-            );
-          })}
-        </Routes>
-      </Router>
+      {!isLoading && (
+        <Router>
+          <Routes>
+            {routes.map((route) => {
+              const Page = route.page;
+              const isAuth = !route.isPrivate || user.isAdmin;
+              const Layout = route.isShowHeader
+                ? DefaultComponent
+                : React.Fragment;
+              return (
+                <Route
+                  key={route.path}
+                  path={isAuth ? route.path : undefined}
+                  element={
+                    <Layout>
+                      <Page />
+                    </Layout>
+                  }
+                />
+              );
+            })}
+          </Routes>
+        </Router>
+      )}
     </div>
   );
 }

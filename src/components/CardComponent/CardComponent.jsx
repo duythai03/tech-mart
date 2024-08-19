@@ -2,7 +2,18 @@ import React from "react";
 import official from "../../assets/images/official.png";
 import FiveStarsComponent from "../FiveStarsComponent/FiveStarsComponent";
 
-function CardComponent() {
+function CardComponent(props) {
+  const {
+    countInStock,
+    description,
+    image,
+    name,
+    price,
+    rating,
+    type,
+    discount,
+    selled,
+  } = props;
   return (
     <div className="card bg-white w-[17rem] sm:w-[22rem] shadow-lg border-[1px] border-lineColor hover:shadow-2xl group relative">
       <a href="/">
@@ -20,18 +31,22 @@ function CardComponent() {
         </figure>
         <div className="card-body">
           <h2 className="card-title line-clamp-2 text-2xl font-normal">
-            Giày Adidas hàng hiệu xịn xò con bò
+            {name}
           </h2>
-          <FiveStarsComponent />
+          <FiveStarsComponent rating={rating} />
           <div className="text-[#ff4759] font-semibold">
-            <span className=" text-3xl">190.000</span>
+            <span className=" text-3xl">
+              {((price * (100 - discount)) / 100).toLocaleString("vi-VN")}
+            </span>
             <span className="text-base">₫</span>
           </div>
           <div className="">
             <div className="px-2 bg-[#f5f5fa] inline-block rounded-xl">
-              -28%
+              -{discount}%
             </div>
-            <span className="line-through">290.000</span>
+            <span className="line-through">
+              {price.toLocaleString("vi-VN")}
+            </span>
             <span className="text-base">₫</span>
           </div>
         </div>

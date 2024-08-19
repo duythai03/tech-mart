@@ -67,6 +67,16 @@ function HeaderComponent() {
                         Thông tin người dùng
                       </Link>
                     </li>
+                    {user?.isAdmin && (
+                      <li>
+                        <Link
+                          to="/system/admin"
+                          className="hover:text-mainBlue"
+                        >
+                          Quản trị hệ thống
+                        </Link>
+                      </li>
+                    )}
                     <li>
                       <div
                         className="hover:text-mainBlue"

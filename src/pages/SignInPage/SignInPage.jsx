@@ -20,7 +20,7 @@ function SignInPage() {
 
   useEffect(() => {
     if (isSuccess) {
-      localStorage.setItem("acccess_oken", JSON.stringify(data?.access_token));
+      localStorage.setItem("access_oken", JSON.stringify(data?.access_token));
       if (data?.access_token) {
         const user = jwtDecode(data?.access_token);
         if (user?.id) {
